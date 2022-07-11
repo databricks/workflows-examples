@@ -1,15 +1,26 @@
-Welcome to your new dbt project!
+# Marketing Analytics Demo
 
-### Using the starter project
+This folder contains the dbt project for the Databricks Marketing Analytics with Fivetran and dbt blog post.
 
-Try running the following commands:
+## Using the dbt project in Databricks Workflows
+
+Fork this repo and create a Databricks Workflows job pointing to the repo with 2 tasks
+
+Task 1 should run the dbt commands:
+- dbt deps
 - dbt run
+
+Task 2 should run the dbt command:
 - dbt test
 
+## Using with dbt Core or dbt Cloud
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+Follow the instructions for setting up dbt and Databricks:
+
+- [dbt Core](https://docs.databricks.com/integrations/prep/dbt.html)
+- [dbt Cloud](https://docs.databricks.com/integrations/prep/dbt-cloud.html)
+
+Then fork and git clone this repo locally or create a connection in dbt Cloud
+
+
+
