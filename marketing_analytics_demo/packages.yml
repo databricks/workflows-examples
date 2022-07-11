@@ -1,0 +1,7 @@
+packages:
+  - package: dbt-labs/spark_utils
+    version: 0.3.0
+  - package: fivetran/marketo_source
+    version: [">=0.7.0", "<0.8.0"]
+  - package: fivetran/salesforce_source
+    version: [">=0.4.0", "<0.5.0"]

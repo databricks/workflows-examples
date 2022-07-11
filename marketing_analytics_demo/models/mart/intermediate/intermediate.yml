@@ -1,0 +1,4 @@
+version: 2
+
+models:
+  - name: int_email_open_clicks_joined

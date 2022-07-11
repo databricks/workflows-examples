@@ -1,0 +1,11 @@
+marketing_analytics_demo:
+  target: dev
+  outputs:
+    dev:
+      host: "{{ env_var('DBT_HOST') }}"
+      http_path: "/sql/1.0/endpoints/{{ env_var('DBT_DBSQL_WAREHOUSE_ID') }}"
+      catalog: users
+      schema: tahir_fayyaz
+      threads: 8
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
+      type: databricks

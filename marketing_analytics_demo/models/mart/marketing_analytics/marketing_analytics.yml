@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: account_email_engagement
+  - name: country_email_engagement

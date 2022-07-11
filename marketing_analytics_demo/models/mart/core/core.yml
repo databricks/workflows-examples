@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_account
+    description: "The Account Dimension Table"
+    columns:
+      - name: account_id
+        description: "Primary key"
+        tests:
+          - not_null
+  - name: dim_user
+    description: "The User Dimension Table"
+    columns:
+      - name: lead_id
+        description: "Primary key"
+        tests:
+          - not_null

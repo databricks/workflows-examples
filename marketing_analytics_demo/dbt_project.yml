@@ -1,0 +1,99 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'marketing_analytics_demo'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'marketing_analytics_demo'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+  
+seeds:
+  +file_format: delta
+  
+snapshots:
+  +file_format: delta
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
+
+vars:
+  marketo_source:
+    marketo_database: hive_metastore # leave blank to use the default catalog 
+    marketo_schema: marketing_marketo
+  salesforce_source:
+    salesforce_database: hive_metastore # leave blank to use the default catalog 
+    salesforce_schema: marketing_sfdc_fivetran
+  
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/ directory
+# as tables. These settings can be overridden in the individual model files
+# using the `{{ config(...) }}` macro.
+# models:
+#   marketing_lakehouse:
+#     # Config indicated by + and applies to all files under models/example/
+#     example:
+#       +materialized: view
+
+models:
+  marketing_analytics_demo:
+    mart:
+      +materialized: table
+  marketo_source:
+    +materialized: table
+    +schema:  # leave blank for just the target_schema
+    tmp:
+      stg_marketo__activity_email_bounced_tmp:
+        +enabled: false
+      stg_marketo__email_template_history_tmp:
+        +enabled: false
+    stg_marketo__activity_email_bounced:
+      +enabled: false
+    stg_marketo__email_template_history:
+      +enabled: false
+  salesforce_source:
+    +materialized: table
+    +schema:  # leave blank for just the target_schema
+  
+  # marketo:
+  #   intermediate:
+  #     marketo__change_data_details:
+  #       +partition_by: ['date_day']
+  #     marketo__change_data_pivot:
+  #       +partition_by: ['date_day']
+  #     marketo__change_data_scd:
+  #       +partition_by: ['valid_to']
+  #     marketo__lead_calendar_spine:
+  #       +partition_by: ['date_day']
+  #     marketo__email_stats__by_lead:
+  #       +enabled: false
+  #     marketo__bounces__by_sent_email:
+  #       +enabled: false
+  #     marketo__email_stats__by_email_template:
+  #       +enabled: false
+  #   marketo__email_templates:
+  #     +enabled: false
+  #   marketo__email_sends:
+  #     +enabled: false
+  #   marketo__leads:
+  #     +enabled: false
