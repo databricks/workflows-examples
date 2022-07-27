@@ -3,5 +3,7 @@ packages:
     version: 0.3.0
   - package: dbt-labs/codegen
     version: 0.7.0
-  - package: dbt-labs/audit_helper
-    version: 0.5.0
+  - package: dbt-labs/dbt_external_tables
+    version: 0.8.0
+  # - package: dbt-labs/audit_helper
+  #   version: 0.5.0
