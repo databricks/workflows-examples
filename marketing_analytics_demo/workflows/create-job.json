@@ -1,0 +1,97 @@
+{
+    "creator_user_name": "user@company.com",
+    "run_as_user_name": "user@company.com",
+    "run_as_owner": true,
+    "settings": {
+        "name": "Fivetran & dbt - Marketing analytics demo",
+        "email_notifications": {
+            "no_alert_for_skipped_runs": false
+        },
+        "timeout_seconds": 0,
+        "schedule": {
+            "quartz_cron_expression": "44 0 13 * * ?",
+            "timezone_id": "UTC",
+            "pause_status": "PAUSED"
+        },
+        "max_concurrent_runs": 1,
+        "tasks": [
+            {
+                "task_key": "dbt_run",
+                "dbt_task": {
+                    "project_directory": "marketing_analytics_demo/dbt",
+                    "commands": [
+                        "dbt deps",
+                        "dbt run"
+                    ],
+                    "schema": "mkt_analytics_prod"
+                },
+                "job_cluster_key": "Shared_job_cluster",
+                "libraries": [
+                    {
+                        "pypi": {
+                            "package": "dbt-core>=1.0.0,<2.0.0"
+                        }
+                    },
+                    {
+                        "pypi": {
+                            "package": "dbt-databricks>=1.0.0,<2.0.0"
+                        }
+                    }
+                ],
+                "timeout_seconds": 0,
+                "email_notifications": {}
+            },
+            {
+                "task_key": "dbt_test",
+                "depends_on": [
+                    {
+                        "task_key": "dbt_run"
+                    }
+                ],
+                "dbt_task": {
+                    "project_directory": "marketing_analytics_demo/dbt",
+                    "commands": [
+                        "dbt test"
+                    ],
+                    "schema": "mkt_analytics_prod"
+                },
+                "job_cluster_key": "Shared_job_cluster",
+                "libraries": [
+                    {
+                        "pypi": {
+                            "package": "dbt-core>=1.0.0,<2.0.0"
+                        }
+                    },
+                    {
+                        "pypi": {
+                            "package": "dbt-databricks>=1.0.0,<2.0.0"
+                        }
+                    }
+                ],
+                "timeout_seconds": 0,
+                "email_notifications": {}
+            }
+        ],
+        "job_clusters": [
+            {
+                "job_cluster_key": "Shared_job_cluster",
+                "new_cluster": {
+                    "cluster_name": "",
+                    "spark_version": "10.4.x-scala2.12",
+                    "spark_env_vars": {
+                        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                    },
+                    "data_security_mode": "NONE",
+                    "runtime_engine": "STANDARD",
+                    "num_workers": 1
+                }
+            }
+        ],
+        "git_source": {
+            "git_url": "https://github.com/user_name/workflows-examples",
+            "git_provider": "gitHub",
+            "git_branch": "main"
+        },
+        "format": "MULTI_TASK"
+    }
+}
