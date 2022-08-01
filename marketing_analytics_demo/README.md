@@ -1,6 +1,6 @@
 # Marketing Analytics Demo
 
-This folder contains the Databricks Workflows job configuration and the dbt project for the Databricks Marketing Analytics with Fivetran and dbt blog post.
+This folder contains the Databricks Workflows [job configuration](workflows/create-job.json) and the [dbt project](dbt) for the Databricks Marketing Analytics with Fivetran and dbt blog post.
 
 ## Setting up dbt project in a Databricks Workflows job via the UI
 
@@ -19,7 +19,7 @@ Full steps are shown in the blog post.
 
 ## Setting dbt project in a Databricks Workflows job using CLI or API
 
-Use the Workflows [create-job.json](/workflows/create-job.json) configuration to set-up the job using one of the following:
+Use the Workflows [create-job.json](workflows/create-job.json) configuration to set-up the job using one of the following:
 
 - [dbx](https://dbx.readthedocs.io/en/latest/guidance/multitask_jobs.html#sample-multitask-jobs-based-on-jobs-api-2-1)
 - [Databricks Jobs CLI](https://docs.databricks.com/dev-tools/cli/jobs-cli.html#create-a-job)
