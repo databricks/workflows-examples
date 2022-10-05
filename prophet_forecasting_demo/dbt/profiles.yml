@@ -1,0 +1,10 @@
+tpc_ds_benchmark:
+  target: databricks_job
+  outputs:
+    databricks_job:
+      type: databricks
+      method: http
+      schema: "dbt_demo"
+      host: "{{ env_var('DBT_HOST') }}"
+      http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/1005-133139-6fgraiod"
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
