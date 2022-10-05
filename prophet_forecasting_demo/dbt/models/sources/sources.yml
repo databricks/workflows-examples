@@ -1,0 +1,6 @@
+version: 2
+
+sources:
+  - name: dbt_demo
+    tables:
+      - name: raw_store_item_sales
