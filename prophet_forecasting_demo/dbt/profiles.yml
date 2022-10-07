@@ -1,4 +1,4 @@
-tpc_ds_benchmark:
+prophet_forecasting_demo:
   target: databricks_job
   outputs:
     databricks_job:
